@@ -1,4 +1,4 @@
-![Circular Control](./Recources/CircularControl.png)
+![Circular Control](https://github.com/philzet/PZCircularControl/blob/master/Resources/CircularControl.png)
 
 # SwiftUI Circular Control
 
@@ -18,7 +18,7 @@ A custom circular progress bar made in SwiftUI.
 
 ### Basic example
 
-```
+```swift
 PZCircularControl(
     PZCircularControlParams(
         innerBackgroundColor: Color.clear,
@@ -30,11 +30,11 @@ PZCircularControl(
 
 This produces the following output:
 
-![Output Image](./Recources/Example1.png)
+![Output Image](https://github.com/philzet/PZCircularControl/blob/master/Resources/Example1.png)
 
 The params object's instance data can be modified and animated. For example, the following code animates the control to the 35% state when the button is tapped:
 
-```
+```swift
 PZExampleButton(label: "35%", font: .headline) { 
     withAnimation(.easeInOut(duration: 1.0)) { 
         control.params.progress = CGFloat(0.35) 
@@ -46,7 +46,7 @@ PZExampleButton(label: "35%", font: .headline) {
 
 ### Dark background (see cover image)
 
-```
+```swift
 PZCircularControl(
     PZCircularControlParams(
         innerBackgroundColor: Color.black,
@@ -62,7 +62,7 @@ PZCircularControl(
 
 ### Purple text and gradient fill
 
-```
+```swift
 PZCircularControl(
     PZCircularControlParams(
         innerBackgroundColor: Color.clear,
@@ -76,7 +76,7 @@ PZCircularControl(
 )
 ```
 
-![Output Image](./Recources/Example2.png)
+![Output Image](https://github.com/philzet/PZCircularControl/blob/master/Resources/Example2.png)
 
 ## Customization
 
