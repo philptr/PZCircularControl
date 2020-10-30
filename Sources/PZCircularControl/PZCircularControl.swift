@@ -30,16 +30,16 @@ public struct PZCircularControl<InnerBackgoundType: ShapeStyle, OuterBackgroundT
     
     public var body: some View {
         Color.clear.overlay(
-                       Indicator<InnerBackgoundType, OuterBackgroundType, TintType>(
-                        progress: self.params.progress,
-                        innerBackgroundColor: self.params.innerBackgroundColor,
-                        outerBackgroundColor: self.params.outerBackgroundColor,
-                        tintColor: self.params.tintColor,
-                        textColor: self.params.textColor,
-                        barWidth: self.params.barWidth,
-                        glowDistance: self.params.glowDistance,
-                        font: self.params.font
-                )
+            Indicator<InnerBackgoundType, OuterBackgroundType, TintType>(
+                progress: self.params.progress,
+                innerBackgroundColor: self.params.innerBackgroundColor,
+                outerBackgroundColor: self.params.outerBackgroundColor,
+                tintColor: self.params.tintColor,
+                textColor: self.params.textColor,
+                barWidth: self.params.barWidth,
+                glowDistance: self.params.glowDistance,
+                font: self.params.font
+            )
         )
     }
 }

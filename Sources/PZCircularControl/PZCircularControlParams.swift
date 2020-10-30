@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgroundType: ShapeStyle, TintType: ShapeStyle>: ObservableObject {
-
+    
     @Published public var progress: CGFloat = 0
     @Published public var innerBackgroundColor: InnerBackgoundType
     @Published public var outerBackgroundColor: OuterBackgroundType
@@ -49,17 +49,17 @@ extension PZCircularControlParams: Equatable, Hashable {
     
     public static func == (lhs: PZCircularControlParams, rhs: PZCircularControlParams) -> Bool {
         return lhs.barWidth == rhs.barWidth
-        && lhs.progress == rhs.progress
-        && lhs.textColor == rhs.textColor
-        && lhs.glowDistance == rhs.glowDistance
-        && lhs.font == rhs.font
+            && lhs.progress == rhs.progress
+            && lhs.textColor == rhs.textColor
+            && lhs.glowDistance == rhs.glowDistance
+            && lhs.font == rhs.font
     }
-
+    
     public func hash(into hasher: inout Hasher) {
-       var hashValue: Int {
-           var hasher = Hasher()
-           self.hash(into: &hasher)
-           return hasher.finalize()
-       }
+        var hashValue: Int {
+            var hasher = Hasher()
+            self.hash(into: &hasher)
+            return hasher.finalize()
+        }
     }
 }
