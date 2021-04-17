@@ -38,7 +38,8 @@ public struct PZCircularControl<InnerBackgoundType: ShapeStyle, OuterBackgroundT
                 textColor: self.params.textColor,
                 barWidth: self.params.barWidth,
                 glowDistance: self.params.glowDistance,
-                font: self.params.font
+                font: self.params.font,
+                textFormatter: self.params.textFormatter
             )
         )
     }

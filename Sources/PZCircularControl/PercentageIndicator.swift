@@ -15,6 +15,7 @@ internal struct PercentageIndicator<S: ShapeStyle>: AnimatableModifier {
     var barWidth: CGFloat
     var glowDistance: CGFloat
     var font: Font
+    var textFormatter: ((CGFloat) -> String)
     
     var animatableData: CGFloat {
         get { pct }
@@ -37,7 +38,7 @@ internal struct PercentageIndicator<S: ShapeStyle>: AnimatableModifier {
                         .fill(self.tintColor)
                      
             )
-            .overlay(!self.isBackground ? LabelView(pct: pct, textColor: self.textColor, font: self.font) : nil)
+            .overlay(!self.isBackground ? LabelView(pct: pct, textColor: self.textColor, font: self.font, textFormatter: self.textFormatter) : nil)
     }
     
     

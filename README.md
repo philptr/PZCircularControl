@@ -83,7 +83,7 @@ PZCircularControl(
 `PZCircularControlParams` object is accessible through the `params` instance field of a `PZCircularControl`. Any change to the instance will be reflected on the control automatically, without the need to refresh it or reload any data. 
 
 Some customization options include:
-* `progress` (accessible via `<<yourControlInstance>>.params.progress`) – the current progress the control displays (from 0.0 to 0.1, as `CGFloat`).
+* `progress` (accessible via `<<yourControlInstance>>.params.progress`) – the current progress the control displays (from 0.0 to 1.0, as `CGFloat`).
 * `glowDistance` – the radius of the glow effect around the control (`CGFloat`). Set to 0.0 to remove the glow.
 * `barWidth` – the width of the stroke of the control.
 * `textColor` – the progress label color (as SwiftUI `Color`).
@@ -91,12 +91,13 @@ Some customization options include:
 * `innerBackgroundColor` – the color of the inner part of your control (inner radius). Has to conform to `ShapeStyle` (ie. anything from `Color` to `Gradient`).
 * `outerBackgroundColor` – the color of the active part's background. Has to conform to `ShapeStyle` (ie. anything from `Color` to `Gradient`).
 * `tintColor` – the tint color of the active area of your control. Has to conform to `ShapeStyle` (ie. anything from `Color` to `Gradient`).
+* `textFormatter` – an optional closure that takes in a CGFloat value of the current progress between 0.0 and 1.0 and returns formatted text that will be displayed in the center of the progress bar.
 
 ## License
 
 MIT License
 
-Copyright (c) 2019 Phil Zet (a.k.a. Phil Zakharchenko)
+Copyright (c) 2019-2021 Phil Zet (a.k.a. Phil Zakharchenko)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

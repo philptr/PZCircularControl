@@ -18,6 +18,7 @@ open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgrou
     @Published public var barWidth: CGFloat
     @Published public var glowDistance: CGFloat
     @Published public var font: Font
+    @Published public var textFormatter: ((CGFloat) -> String)
     
     public init(
         innerBackgroundColor: InnerBackgoundType = Color.clear as! InnerBackgoundType,
@@ -31,7 +32,10 @@ open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgrou
         barWidth: CGFloat = 20.0,
         glowDistance: CGFloat = 10.0,
         font: Font = .largeTitle,
-        initialValue: CGFloat = 0.0
+        initialValue: CGFloat = 0.0,
+        textFormatter: @escaping ((CGFloat) -> String) = { progress in
+            "\(Int(progress * 100))%"
+        }
     ) {
         self.innerBackgroundColor = innerBackgroundColor
         self.outerBackgroundColor = outerBackgroundColor
@@ -41,6 +45,7 @@ open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgrou
         self.glowDistance = glowDistance
         self.font = font
         self.progress = initialValue
+        self.textFormatter = textFormatter
     }
     
 }

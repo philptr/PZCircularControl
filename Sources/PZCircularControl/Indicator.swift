@@ -16,6 +16,7 @@ internal struct Indicator<InnerBackgoundType: ShapeStyle, OuterBackgroundType: S
     var barWidth: CGFloat
     var glowDistance: CGFloat
     var font: Font
+    var textFormatter: ((CGFloat) -> String)
     
     var body: some View {
         
@@ -31,7 +32,8 @@ internal struct Indicator<InnerBackgoundType: ShapeStyle, OuterBackgroundType: S
                             textColor: self.textColor,
                             barWidth: self.barWidth,
                             glowDistance: self.glowDistance,
-                            font: self.font
+                            font: self.font,
+                            textFormatter: self.textFormatter
                         )
                     )
                     .modifier(
@@ -41,7 +43,8 @@ internal struct Indicator<InnerBackgoundType: ShapeStyle, OuterBackgroundType: S
                             textColor: self.textColor,
                             barWidth: self.barWidth,
                             glowDistance: self.glowDistance,
-                            font: self.font
+                            font: self.font,
+                            textFormatter: self.textFormatter
                         )
                     )
             }

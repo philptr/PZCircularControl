@@ -12,9 +12,10 @@ internal struct LabelView: View {
     let pct: CGFloat
     let textColor: Color
     var font: Font
+    var textFormatter: ((CGFloat) -> String)
     
     var body: some View {
-        Text("\(Int(pct * 100))%")
+        Text(textFormatter(pct))
             .font(self.font)
             .fontWeight(.bold)
             .foregroundColor(self.textColor)
