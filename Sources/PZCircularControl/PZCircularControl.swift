@@ -39,7 +39,8 @@ public struct PZCircularControl<InnerBackgoundType: ShapeStyle, OuterBackgroundT
                 barWidth: self.params.barWidth,
                 glowDistance: self.params.glowDistance,
                 font: self.params.font,
-                textFormatter: self.params.textFormatter
+                textFormatter: self.params.textFormatter,
+                overlayView: self.params.overlayView
             )
         )
     }

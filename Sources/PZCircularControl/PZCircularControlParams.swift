@@ -8,7 +8,9 @@
 import SwiftUI
 import Combine
 
-open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgroundType: ShapeStyle, TintType: ShapeStyle>: ObservableObject {
+open class PZCircularControlParams<InnerBackgoundType: ShapeStyle,
+                                   OuterBackgroundType: ShapeStyle,
+                                   TintType: ShapeStyle>: ObservableObject {
     
     @Published public var progress: CGFloat = 0
     @Published public var innerBackgroundColor: InnerBackgoundType
@@ -19,6 +21,7 @@ open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgrou
     @Published public var glowDistance: CGFloat
     @Published public var font: Font
     @Published public var textFormatter: ((CGFloat) -> String)
+    @Published public var overlayView: AnyView?
     
     public init(
         innerBackgroundColor: InnerBackgoundType = Color.clear as! InnerBackgoundType,
@@ -35,7 +38,8 @@ open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgrou
         initialValue: CGFloat = 0.0,
         textFormatter: @escaping ((CGFloat) -> String) = { progress in
             "\(Int(progress * 100))%"
-        }
+        },
+        overlayView: AnyView? = nil
     ) {
         self.innerBackgroundColor = innerBackgroundColor
         self.outerBackgroundColor = outerBackgroundColor
@@ -46,6 +50,7 @@ open class PZCircularControlParams<InnerBackgoundType: ShapeStyle, OuterBackgrou
         self.font = font
         self.progress = initialValue
         self.textFormatter = textFormatter
+        self.overlayView = overlayView
     }
     
 }

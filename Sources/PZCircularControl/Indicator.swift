@@ -17,6 +17,7 @@ internal struct Indicator<InnerBackgoundType: ShapeStyle, OuterBackgroundType: S
     var glowDistance: CGFloat
     var font: Font
     var textFormatter: ((CGFloat) -> String)
+    var overlayView: AnyView?
     
     var body: some View {
         
@@ -44,7 +45,8 @@ internal struct Indicator<InnerBackgoundType: ShapeStyle, OuterBackgroundType: S
                             barWidth: self.barWidth,
                             glowDistance: self.glowDistance,
                             font: self.font,
-                            textFormatter: self.textFormatter
+                            textFormatter: self.textFormatter,
+                            overlayView: overlayView
                         )
                     )
             }
