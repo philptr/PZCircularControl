@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Example SwiftUI
 //
-//  Created by Phil Zet on 12/6/19.
+//  Created by Zetegy on 12/6/19.
 //
 
 import SwiftUI
@@ -30,27 +30,27 @@ struct ContentView: View {
     ]
 
     var body: some View {
-        VStack {
+        VStack(spacing: 40) {
             Spacer()
            
             ForEach(self.myControls, id: \.id) { control in
-                VStack {
+                VStack(spacing: 8) {
                     control
                     Spacer()
-                    HStack(spacing: 10) {
-                        PZExampleButton(label: "0%", font: .headline) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = 0.0 } }
+                    HStack(spacing: 8) {
+                        ExampleButton(label: "0%", font: .body) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = 0.0 } }
 
-                        PZExampleButton(label: "35%", font: .headline) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = CGFloat(0.35) } }
+                        ExampleButton(label: "35%", font: .body) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = CGFloat(0.35) } }
 
-                        PZExampleButton(label: "100%", font: .headline) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = CGFloat(1.0) } }
+                        ExampleButton(label: "100%", font: .body) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = CGFloat(1.0) } }
                         
-                        PZExampleButton(label: "?", font: .headline) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = CGFloat(Float.random(in: 0...1)) } }
+                        ExampleButton(label: "Random", font: .body) { withAnimation(.easeInOut(duration: 1.0)) { control.params.progress = CGFloat(Float.random(in: 0...1)) } }
                     }
                 }
             }
             
            
-        }.navigationBarTitle("Example 10")
+        }.navigationBarTitle("Example")
     }
 }
 
@@ -92,7 +92,6 @@ struct ContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            
             ContentView()
             
             ForEach(examples, id: \.id) { control in
@@ -100,7 +99,6 @@ struct ContentView_Previews: PreviewProvider {
                     control
                     }.previewLayout(.fixed(width: 300, height: 300))
             }
-            
         }
     }
     

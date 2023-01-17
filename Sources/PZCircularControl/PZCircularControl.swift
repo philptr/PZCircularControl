@@ -2,7 +2,7 @@
 //  PZCircularControl.swift
 //  PZCircularControl
 //
-//  Created by Phil Zet on 12/6/19.
+//  Created by Zetegy on 12/6/19.
 //
 
 import Foundation
@@ -29,19 +29,17 @@ public struct PZCircularControl<InnerBackgoundType: ShapeStyle, OuterBackgroundT
     }
     
     public var body: some View {
-        Color.clear.overlay(
-            Indicator<InnerBackgoundType, OuterBackgroundType, TintType>(
-                progress: self.params.progress,
-                innerBackgroundColor: self.params.innerBackgroundColor,
-                outerBackgroundColor: self.params.outerBackgroundColor,
-                tintColor: self.params.tintColor,
-                textColor: self.params.textColor,
-                barWidth: self.params.barWidth,
-                glowDistance: self.params.glowDistance,
-                font: self.params.font,
-                textFormatter: self.params.textFormatter,
-                overlayView: self.params.overlayView
-            )
+        Indicator<InnerBackgoundType, OuterBackgroundType, TintType>(
+            progress: self.params.progress,
+            innerBackgroundColor: self.params.innerBackgroundColor,
+            outerBackgroundColor: self.params.outerBackgroundColor,
+            tintColor: self.params.tintColor,
+            textColor: self.params.textColor,
+            barWidth: self.params.barWidth,
+            glowDistance: self.params.glowDistance,
+            font: self.params.font,
+            textFormatter: self.params.textFormatter,
+            overlayView: self.params.overlayView
         )
     }
 }

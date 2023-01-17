@@ -2,7 +2,7 @@
 //  PercentageIndicator.swift
 //  PZCircularControl
 //
-//  Created by Phil Zet on 12/6/19.
+//  Created by Zetegy on 12/6/19.
 //
 
 import SwiftUI
@@ -16,39 +16,51 @@ internal struct PercentageIndicator<S: ShapeStyle>: AnimatableModifier {
     var glowDistance: CGFloat
     var font: Font
     var textFormatter: ((CGFloat) -> String)
-    var overlayView: AnyView?
+    var overlayView: (any View)?
     
     var animatableData: CGFloat {
         get { pct }
         set { pct = newValue }
     }
     
+    private var strokeStyle: StrokeStyle {
+        StrokeStyle(
+            lineWidth: self.barWidth,
+            lineCap: .round
+        )
+    }
+    
+    private var overlayOrLabel: any View {
+        guard let overlayView else {
+            return LabelView(
+                pct: pct,
+                textColor: textColor,
+                font: self.font,
+                textFormatter: textFormatter
+            )
+        }
+        
+        return overlayView
+    }
+    
     func body(content: Content) -> some View {
         content
-            .overlay(!self.isBackground ? ArcShape(pct: pct)
-                        .stroke(style:
-                                    StrokeStyle(lineWidth: self.barWidth, lineCap: .round))
-                        .fill(self.tintColor)
-                        .blur(radius: self.glowDistance)
-                        .opacity(0.95)
-                        : nil
-            )
-            .overlay(ArcShape(pct: pct)
-                        .stroke(style:
-                                    StrokeStyle(lineWidth: self.barWidth, lineCap: .round))
-                        .fill(self.tintColor)
-                     
-            )
-            .overlay(!isBackground ?
-                     (overlayView ??
-                      AnyView(LabelView(
-                        pct: pct,
-                        textColor: textColor,
-                        font: self.font,
-                        textFormatter: textFormatter
-                      ))
-                     )
-                     : nil)
+            .overlay {
+                isBackground ? nil :
+                ArcShape(pct: pct)
+                    .stroke(style: strokeStyle)
+                    .fill(tintColor)
+                    .blur(radius: glowDistance)
+                    .opacity(0.95)
+            }
+            .overlay {
+                ArcShape(pct: pct)
+                    .stroke(style: strokeStyle)
+                    .fill(tintColor)
+            }
+            .overlay {
+                isBackground ? nil : AnyView(overlayOrLabel)
+            }
     }
     
     
