@@ -1,5 +1,5 @@
 //
-//  DefaultLabel.swift
+//  DefaultCircularControlLabel.swift
 //  PZCircularControl
 //
 //  Created by Phil Zakharchenko on 12/6/19.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct DefaultLabel: View {
-    let format: DefaultLabelFormat
+public struct DefaultCircularControlLabel: View {
+    let format: CircularControlLabelFormat
     
     @Environment(\.circularControlProgress) private var progress
     
@@ -22,23 +22,6 @@ public struct DefaultLabel: View {
                 .contentTransition(.numericText())
             
             Text("")
-        }
-    }
-}
-
-public enum DefaultLabelFormat {
-    case percentage
-    case fraction
-    case custom((Double) -> String)
-    
-    func string(from value: Double) -> String {
-        switch self {
-        case .percentage:
-            return "\(Int(value * 100))%"
-        case .fraction:
-            return String(format: "%.1f", value)
-        case .custom(let formatter):
-            return formatter(value)
         }
     }
 }

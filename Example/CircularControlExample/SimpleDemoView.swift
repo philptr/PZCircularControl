@@ -29,6 +29,7 @@ struct SimpleDemoView: View {
             ),
             shadow: .init(color: .teal.opacity(0.6), radius: 12)
         ), format: .fraction)
+        .circularControlProgressAnimation(.bouncy)
         .fontDesign(.serif)
         .padding()
         
@@ -44,6 +45,7 @@ struct SimpleDemoView: View {
                 .font(.largeTitle)
                 .foregroundStyle(.orange)
         }
+        .circularControlProgressAnimation(.bouncy(duration: 2.4))
         .padding()
     }
 }

@@ -23,6 +23,7 @@ extension CircularControl {
         @State private var isDragging = false
         
         @Environment(\.isEnabled) private var isEnabled
+        @Environment(\.circularControlProgressAnimation) private var progressAnimation
         
         var body: some View {
             GeometryReader { geometry in
@@ -63,11 +64,13 @@ extension CircularControl {
             .padding(strokeWidth / 2)
             .onChange(of: progress) { oldValue, newValue in
                 if !isDragging {
-                    currentProgress = newValue
+                    withAnimation(progressAnimation) {
+                        currentProgress = newValue
+                    }
                 }
             }
             .onAppear {
-                withAnimation(.snappy) {
+                withAnimation(progressAnimation) {
                     currentProgress = progress
                 }
             }

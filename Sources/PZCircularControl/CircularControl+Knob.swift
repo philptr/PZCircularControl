@@ -20,9 +20,10 @@ extension CircularControl {
                 .fill(style.opacity(isEnabled ? isDragging ? 0.8 : 1 : 0.3))
                 .background(.thinMaterial)
                 .clipShape(.circle)
+                .contentShape(.circle)
                 .shadow(radius: 0.5)
                 .shadow(radius: isDragging ? 3 : 2)
-#if !os(macOS)
+#if !os(macOS) && !os(watchOS)
                 .hoverEffect()
 #endif
         }

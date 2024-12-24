@@ -8,6 +8,10 @@
 import SwiftUI
 
 /// A circular progress control that supports rich customization of appearance and behavior.
+///
+/// `CircularControl` can be either static or interactive.
+/// The control supports customizable appearance through generic style parameters and can display a built-in or custom label view
+/// in its center.
 public struct CircularControl<Label: View, TrackStyle: ShapeStyle, ProgressStyle: ShapeStyle, KnobStyle: ShapeStyle>: View {
     private let progress: Double
     private let isEditable: Bool
@@ -21,6 +25,15 @@ public struct CircularControl<Label: View, TrackStyle: ShapeStyle, ProgressStyle
     @Environment(\.circularControlAllowsWrapping) private var allowsWrapping
     @Environment(\.circularControlKnobScale) private var knobScale
     
+    /// Creates a circular control with the specified configuration.
+    ///
+    /// - Parameters:
+    ///   - progress: The current progress value, between 0 and 1.
+    ///   - isEditable: Whether the control responds to user interaction. Defaults to `false`.
+    ///   - strokeWidth: The width of the progress track. Defaults to 20.
+    ///   - style: The visual style configuration for the control.
+    ///   - onProgressChange: A closure called when the progress value changes through user interaction.
+    ///   - label: A view builder that creates the label view displayed in the center of the control.
     public init(
         progress: Double,
         isEditable: Bool = false,
@@ -39,6 +52,16 @@ public struct CircularControl<Label: View, TrackStyle: ShapeStyle, ProgressStyle
         self.label = label()
     }
     
+    /// Creates an editable circular control bound to a progress value.
+    ///
+    /// This initializer creates an interactive control that automatically updates the bound progress value
+    /// when the user interacts with it. The control is always editable when created with this initializer.
+    ///
+    /// - Parameters:
+    ///   - progress: A binding to the progress value, which will be clamped between 0 and 1.
+    ///   - strokeWidth: The width of the progress track. Defaults to 20.
+    ///   - style: The visual style configuration for the control.
+    ///   - label: A view builder that creates the label view displayed in the center of the control.
     public init(
         progress: Binding<Double>,
         strokeWidth: CGFloat = .defaultStrokeWidth,
@@ -80,13 +103,25 @@ public struct CircularControl<Label: View, TrackStyle: ShapeStyle, ProgressStyle
 
 // MARK: - Default Label Convenience Initializer
 
-extension CircularControl where Label == DefaultLabel {
+extension CircularControl where Label == DefaultCircularControlLabel {
+    /// Creates a circular control with a default progress label.
+    ///
+    /// This convenience initializer configures the control with a built-in label that formats
+    /// the progress value according to the specified format.
+    ///
+    /// - Parameters:
+    ///   - progress: The current progress value, between 0 and 1.
+    ///   - isEditable: Whether the control responds to user interaction. Defaults to false.
+    ///   - strokeWidth: The width of the progress track. Defaults to 20.
+    ///   - style: The visual style configuration for the control.
+    ///   - format: The format to use for displaying the progress value. Defaults to percentage.
+    ///   - onProgressChange: A closure called when the progress value changes through user interaction.
     public init(
         progress: Double,
         isEditable: Bool = false,
         strokeWidth: CGFloat = .defaultStrokeWidth,
         style: CircularControlStyle<TrackStyle, ProgressStyle, KnobStyle> = .init(),
-        format: DefaultLabelFormat = .percentage,
+        format: CircularControlLabelFormat = .percentage,
         onProgressChange: ((Double) -> Void)? = nil
     ) {
         self.init(
@@ -96,22 +131,33 @@ extension CircularControl where Label == DefaultLabel {
             style: style,
             onProgressChange: onProgressChange
         ) {
-            DefaultLabel(format: format)
+            DefaultCircularControlLabel(format: format)
         }
     }
     
+    /// Creates an editable circular control with a default percentage label bound to a progress value.
+    ///
+    /// This convenience initializer creates an interactive control with a built-in label that formats
+    /// the progress value according to the specified format. The control is always editable when created
+    /// with this initializer.
+    ///
+    /// - Parameters:
+    ///   - progress: A binding to the progress value, which will be clamped between 0 and 1.
+    ///   - strokeWidth: The width of the progress track. Defaults to 20.
+    ///   - style: The visual style configuration for the control.
+    ///   - format: The format to use for displaying the progress value. Defaults to percentage.
     public init(
         progress: Binding<Double>,
         strokeWidth: CGFloat = .defaultStrokeWidth,
         style: CircularControlStyle<TrackStyle, ProgressStyle, KnobStyle> = .init(),
-        format: DefaultLabelFormat = .percentage
+        format: CircularControlLabelFormat = .percentage
     ) {
         self.init(
             progress: progress,
             strokeWidth: strokeWidth,
             style: style
         ) {
-            DefaultLabel(format: format)
+            DefaultCircularControlLabel(format: format)
         }
     }
 }
