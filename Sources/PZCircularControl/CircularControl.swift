@@ -24,17 +24,36 @@ public struct CircularControl<Label: View, TrackStyle: ShapeStyle, ProgressStyle
     public init(
         progress: Double,
         isEditable: Bool = false,
-        strokeWidth: CGFloat = 20,
+        strokeWidth: CGFloat = .defaultStrokeWidth,
         style: CircularControlStyle<TrackStyle, ProgressStyle, KnobStyle> = .init(),
         onProgressChange: ((Double) -> Void)? = nil,
         @ViewBuilder label: () -> Label
     ) {
-        self.progress = progress.clamped(to: 0...1)
-        self._currentProgress = State(initialValue: progress.clamped(to: 0...1))
+        let initialProgress = progress.clamped(to: 0...1)
+        self.progress = initialProgress
+        self._currentProgress = State(initialValue: initialProgress)
         self.isEditable = isEditable
         self.strokeWidth = strokeWidth
         self.strokeStyle = style
         self.onProgressChange = onProgressChange
+        self.label = label()
+    }
+    
+    public init(
+        progress: Binding<Double>,
+        strokeWidth: CGFloat = .defaultStrokeWidth,
+        style: CircularControlStyle<TrackStyle, ProgressStyle, KnobStyle> = .init(),
+        @ViewBuilder label: () -> Label
+    ) {
+        let initialProgress = progress.wrappedValue.clamped(to: 0...1)
+        self.progress = initialProgress
+        self._currentProgress = State(initialValue: initialProgress)
+        self.isEditable = true
+        self.strokeWidth = strokeWidth
+        self.strokeStyle = style
+        self.onProgressChange = { newValue in
+            progress.wrappedValue = newValue.clamped(to: 0...1)
+        }
         self.label = label()
     }
     
@@ -61,11 +80,11 @@ public struct CircularControl<Label: View, TrackStyle: ShapeStyle, ProgressStyle
 
 // MARK: - Default Label Convenience Initializer
 
-public extension CircularControl where Label == DefaultLabel {
-    init(
+extension CircularControl where Label == DefaultLabel {
+    public init(
         progress: Double,
         isEditable: Bool = false,
-        strokeWidth: CGFloat = 20,
+        strokeWidth: CGFloat = .defaultStrokeWidth,
         style: CircularControlStyle<TrackStyle, ProgressStyle, KnobStyle> = .init(),
         format: DefaultLabelFormat = .percentage,
         onProgressChange: ((Double) -> Void)? = nil
@@ -80,6 +99,26 @@ public extension CircularControl where Label == DefaultLabel {
             DefaultLabel(format: format)
         }
     }
+    
+    public init(
+        progress: Binding<Double>,
+        strokeWidth: CGFloat = .defaultStrokeWidth,
+        style: CircularControlStyle<TrackStyle, ProgressStyle, KnobStyle> = .init(),
+        format: DefaultLabelFormat = .percentage
+    ) {
+        self.init(
+            progress: progress,
+            strokeWidth: strokeWidth,
+            style: style
+        ) {
+            DefaultLabel(format: format)
+        }
+    }
+}
+
+extension CGFloat {
+    @usableFromInline
+    static let defaultStrokeWidth: CGFloat = 20
 }
 
 // MARK: - Xcode Previews

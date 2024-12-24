@@ -13,11 +13,16 @@ public struct DefaultLabel: View {
     @Environment(\.circularControlProgress) private var progress
     
     public var body: some View {
-        Text(format.string(from: progress))
-            .font(.system(.title, weight: .semibold).monospacedDigit())
-            .foregroundStyle(.primary)
-            .animation(.snappy, value: progress)
-            .contentTransition(.numericText())
+        ViewThatFits {
+            Text(format.string(from: progress))
+                .font(.system(.title, weight: .semibold).monospacedDigit())
+                .fixedSize()
+                .foregroundStyle(.primary)
+                .animation(.snappy, value: progress)
+                .contentTransition(.numericText())
+            
+            Text("")
+        }
     }
 }
 

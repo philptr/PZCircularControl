@@ -63,9 +63,7 @@ extension CircularControl {
             .padding(strokeWidth / 2)
             .onChange(of: progress) { oldValue, newValue in
                 if !isDragging {
-                    withAnimation(.snappy) {
-                        currentProgress = newValue
-                    }
+                    currentProgress = newValue
                 }
             }
             .onAppear {
