@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "PZCircularControl",
     platforms: [
-        .iOS(.v15), .macOS(.v12), .watchOS(.v8), .tvOS(.v15)
+        .iOS(.v17), .macOS(.v14), .watchOS(.v10), .tvOS(.v17)
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
